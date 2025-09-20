@@ -32,8 +32,7 @@ const Chatbot = () => {
         { text: '🚀 Create your profile and showcase your skills', sender: 'bot' },
         { text: '💼 Find clients and projects in your field', sender: 'bot' },
         { text: '💰 Get paid securely for your work', sender: 'bot' },
-        { text: '📈 Grow your business with our tools', sender: 'bot' },
-        { text: 'Get started: https://frontend-workwagon.vercel.app/freelancer-login', sender: 'bot', isLink: true }
+        { text: '📈 Grow your business with our tools', sender: 'bot' }
       ];
     } 
     else if (lowerMessage.includes('2') || lowerMessage.includes('hire') || lowerMessage.includes('client')) {
@@ -43,7 +42,6 @@ const Chatbot = () => {
         { text: '⭐ View portfolios and client reviews', sender: 'bot' },
         { text: '💬 Communicate directly with freelancers', sender: 'bot' },
         { text: '🔒 Safe payment system with money-back guarantee', sender: 'bot' },
-        { text: 'Browse freelancers: https://frontend-workwagon.vercel.app/freelancer-login', sender: 'bot', isLink: true }
       ];
     }
     else if (lowerMessage.includes('3') || lowerMessage.includes('services') || lowerMessage.includes('gigs')) {
@@ -52,7 +50,6 @@ const Chatbot = () => {
         { text: '🌐 Website Development & Design', sender: 'bot' },
         { text: '🎨 Logo & Branding Services', sender: 'bot' },
         { text: '🔍 SEO & Digital Marketing', sender: 'bot' },
-        { text: 'See all services: https://frontend-workwagon.vercel.app/website', sender: 'bot', isLink: true }
       ];
     }
 
@@ -64,7 +61,6 @@ const Chatbot = () => {
       { text: 'For account or payment assistance:', sender: 'bot' },
       { text: '📞 Call support: +1 (555) 123-4567', sender: 'bot' },
       { 
-        text: '1. Complain and contact form:  https://frontend-workwagon.vercel.app/contact_me', 
         sender: 'bot', 
         isLink: true
       },
@@ -74,7 +70,6 @@ const Chatbot = () => {
   else {
       botResponse = [
         { text: 'For other questions, please:', sender: 'bot' },
-        { text: '1. Check our FAQ: https://frontend-workwagon.vercel.app/contact_me', sender: 'bot', isLink: true },
         { text: '2. Contact our support team', sender: 'bot' },
         { text: '3. Fill out our contact form', sender: 'bot' },
         { text: 'We aim to respond within 1 business day', sender: 'bot' }
