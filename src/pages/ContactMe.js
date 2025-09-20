@@ -32,7 +32,7 @@ const ContactMe = () => {
         data.append(key, formData[key]);
       }
 
-      await axios.post("http://localhost:5000/api/contact", data);
+      await axios.post("https://backend-workwagon.onrender.com/api/contact", data);
       alert("Message sent successfully!");
       navigate("/");
     } catch (error) {

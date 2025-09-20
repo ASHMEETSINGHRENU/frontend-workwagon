@@ -17,7 +17,7 @@ function FreelancerRegistration() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("http://localhost:5000/freelancers/Freregistration", {
+    const res = await fetch("https://backend-workwagon.onrender.com/freelancers/Freregistration", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
