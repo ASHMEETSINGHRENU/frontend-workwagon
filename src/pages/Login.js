@@ -14,7 +14,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://backend-workwagon.onrender.com/api/auth/login", form);
+      const res = await axios.post("https://backend-workwagon.onrender.com/api/auth/login", form);
       localStorage.setItem("user", JSON.stringify(res.data.user));
       alert("Login successful!");
       navigate("/");
