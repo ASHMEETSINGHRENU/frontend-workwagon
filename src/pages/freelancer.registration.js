@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function FreelancerRegistration() {
   const [formData, setFormData] = useState({
@@ -14,18 +15,45 @@ function FreelancerRegistration() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
 
+  //   const res = await fetch("https://backend-workwagon.onrender.com/freelancers/Freregistration", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify(formData),
+  //   });
+
+  //   const data = await res.json();
+  //   alert(data.message);
+  // };
+
+
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  const navigate = useNavigate(); // ✅ Initialize navigation
+
+  try {
     const res = await fetch("https://backend-workwagon.onrender.com/freelancers/Freregistration", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
     });
 
-    const data = await res.json();
-    alert(data.message);
-  };
+    if (res.ok) {
+      alert("Freelancer registration successfully ✅"); // ✅ Fixed custom message
+      navigate("/freelancer-login"); // redirect to login
+    } else {
+      const data = await res.json();
+      alert(data.message || "Registration failed. Please try again.");
+    }
+  } catch (error) {
+    alert("Registration failed. Please try again.");
+    console.error(error);
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
