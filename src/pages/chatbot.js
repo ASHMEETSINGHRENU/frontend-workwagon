@@ -31,7 +31,8 @@ const Chatbot = () => {
         { text: '🚀 Create your profile and showcase your skills', sender: 'bot' },
         { text: '💼 Find clients and projects in your field', sender: 'bot' },
         { text: '💰 Get paid securely for your work', sender: 'bot' },
-        { text: '📈 Grow your business with our tools', sender: 'bot' }
+        { text: '📈 Grow your business with our tools', sender: 'bot' },
+        { text: 'Get started: https://frontend-workwagon.vercel.app/freelancer-login', sender: 'bot', isLink: true }
       ];
     } 
     else if (lowerMessage.includes('2') || lowerMessage.includes('hire') || lowerMessage.includes('client')) {
