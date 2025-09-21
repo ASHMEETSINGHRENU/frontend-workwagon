@@ -32,8 +32,8 @@ function FreelancerRegistration() {
       const data = await res.json();
 
       if (res.ok) {
-        alert("🎉 Registration successful! Redirecting to login...");
-        navigate("/freelancer-login"); // ✅ navigation
+        alert("🎉 Freelancer registration successful! Welcome To WorkWagon");
+        navigate("/freelancer-login"); 
       } else {
         alert("⚠️ " + (data.message || "Registration failed. Try again."));
       }
