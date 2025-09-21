@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function FreelancerRegistration() {
   const [formData, setFormData] = useState({
@@ -11,49 +10,35 @@ function FreelancerRegistration() {
     password: ""
   });
 
+  const navigate = useNavigate(); // ✅ initialize navigation
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  //   const res = await fetch("https://backend-workwagon.onrender.com/freelancers/Freregistration", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(formData),
-  //   });
+    try {
+      const res = await fetch("https://backend-workwagon.onrender.com/freelancers/Freregistration", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-  //   const data = await res.json();
-  //   alert(data.message);
-  // };
-
-
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  const navigate = useNavigate(); // ✅ Initialize navigation
-
-  try {
-    const res = await fetch("https://backend-workwagon.onrender.com/freelancers/Freregistration", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
-
-    if (res.ok) {
-      alert("Freelancer registration successfully ✅"); // ✅ Fixed custom message
-      navigate("/freelancer-login"); // redirect to login
-    } else {
       const data = await res.json();
-      alert(data.message || "Registration failed. Please try again.");
-    }
-  } catch (error) {
-    alert("Registration failed. Please try again.");
-    console.error(error);
-  }
-};
 
+      if (res.ok) {
+        alert("🎉 Registration successful! Please login now.");
+        navigate("/freelancer-login"); // ✅ redirect after registration
+      } else {
+        alert("⚠️ " + (data.message || "Registration failed, try again."));
+      }
+    } catch (err) {
+      alert("❌ Something went wrong. Please try again later.");
+      console.error(err);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
