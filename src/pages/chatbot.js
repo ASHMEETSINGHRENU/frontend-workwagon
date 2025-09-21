@@ -11,8 +11,7 @@ const Chatbot = () => {
         '1. I want to work as a freelancer',
         '2. I need to hire a freelancer',
         '3. Learn about services',
-        '4. Account/payment issues',
-        '5. Other questions'
+        '4. Other questions'
       ]
     }
   ]);
@@ -54,19 +53,6 @@ const Chatbot = () => {
     }
 
 
-
-
- else if (lowerMessage.includes('4') || lowerMessage.includes('account') || lowerMessage.includes('payment')) {
-    botResponse = [
-      { text: 'For account or payment assistance:', sender: 'bot' },
-      { text: '📞 Call support: +1 (555) 123-4567', sender: 'bot' },
-      { 
-        sender: 'bot', 
-        isLink: true
-      },
-      { text: 'If you already filled the form, Don\'t worry, we will get back to you soon.', sender: 'bot' }
-    ];
-  }
   else {
       botResponse = [
         { text: 'For other questions, please:', sender: 'bot' },
