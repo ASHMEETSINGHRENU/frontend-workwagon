@@ -42,6 +42,7 @@ const Chatbot = () => {
         { text: '⭐ View portfolios and client reviews', sender: 'bot' },
         { text: '💬 Communicate directly with freelancers', sender: 'bot' },
         { text: '🔒 Safe payment system with money-back guarantee', sender: 'bot' },
+        { text: 'Get started: https://frontend-workwagon.vercel.app/website', sender: 'bot', isLink: true }
       ];
     }
     else if (lowerMessage.includes('3') || lowerMessage.includes('services') || lowerMessage.includes('gigs')) {
@@ -50,6 +51,7 @@ const Chatbot = () => {
         { text: '🌐 Website Development & Design', sender: 'bot' },
         { text: '🎨 Logo & Branding Services', sender: 'bot' },
         { text: '🔍 SEO & Digital Marketing', sender: 'bot' },
+        { text: 'Get started: https://frontend-workwagon.vercel.app/contact_me', sender: 'bot', isLink: true }
       ];
     }
 
