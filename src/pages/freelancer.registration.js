@@ -10,7 +10,7 @@ function FreelancerRegistration() {
     password: ""
   });
 
-  const navigate = useNavigate(); // ✅ initialize navigation
+  const navigate = useNavigate(); // ✅ define once here
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -20,19 +20,22 @@ function FreelancerRegistration() {
     e.preventDefault();
 
     try {
-      const res = await fetch("https://backend-workwagon.onrender.com/freelancers/Freregistration", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        "https://backend-workwagon.onrender.com/freelancers/Freregistration",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const data = await res.json();
 
       if (res.ok) {
-        alert("🎉 Registration successful! Please login now.");
-        navigate("/freelancer-login"); // ✅ redirect after registration
+        alert("🎉 Registration successful! Redirecting to login...");
+        navigate("/freelancer-login"); // ✅ navigation
       } else {
-        alert("⚠️ " + (data.message || "Registration failed, try again."));
+        alert("⚠️ " + (data.message || "Registration failed. Try again."));
       }
     } catch (err) {
       alert("❌ Something went wrong. Please try again later.");
@@ -43,7 +46,9 @@ function FreelancerRegistration() {
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h1 className="text-3xl font-bold text-blue-600 text-center mb-2">Join as a Freelancer</h1>
+        <h1 className="text-3xl font-bold text-blue-600 text-center mb-2">
+          Join as a Freelancer
+        </h1>
         <p className="text-gray-600 text-center mb-6">
           Start your journey and connect with global opportunities.
         </p>
@@ -119,7 +124,10 @@ function FreelancerRegistration() {
 
         <div className="mt-6 text-sm text-center text-gray-700">
           Already have an account?{" "}
-          <Link to="/freelancer-login" className="text-blue-600 underline hover:font-semibold">
+          <Link
+            to="/freelancer-login"
+            className="text-blue-600 underline hover:font-semibold"
+          >
             Freelancer Login
           </Link>
         </div>
