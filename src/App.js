@@ -24,6 +24,7 @@ import Analysis from "./pages/Analysis";
 
 import Profile from "./pages/profile";
 
+import Portfolio from "./pages/Portfolio";
 const ProtectedRoute = ({ children }) => {
   const user = localStorage.getItem("user");
   return user ? children : <Navigate to="/login" />;
@@ -130,6 +131,7 @@ function App() {
         <Route path="/freelancerWebsite" element={<ProtectedRouteFreelancer><FreelancerWebsite /></ProtectedRouteFreelancer>} />
         <Route path="/freelancerSEO" element={<ProtectedRouteFreelancer><FreelancerSEO /></ProtectedRouteFreelancer>} />
         <Route path="/analysis" element={<ProtectedRouteFreelancer><Analysis /></ProtectedRouteFreelancer>} />
+        <Route path="/portfolio" element={<ProtectedRoute><Portfolio /></ProtectedRoute>} />
 
 
 
