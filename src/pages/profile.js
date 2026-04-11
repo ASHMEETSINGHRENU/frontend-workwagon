@@ -33,7 +33,7 @@ function Profile() {
         setPreview(`https://backend-workwagon.onrender.com/${user.profilePic}`);
       }
     }
-  }, [user]);
+  }, []);
 
   // Handle input change
   const handleChange = (e) => {
