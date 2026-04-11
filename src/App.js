@@ -22,6 +22,7 @@ import FreelancerSEO from './pages/FreelancerSEO';
 
 import Analysis from "./pages/Analysis";
 
+import Profile from "./pages/profile";
 
 const ProtectedRoute = ({ children }) => {
   const user = localStorage.getItem("user");
@@ -48,6 +49,15 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+                 <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+
         <Route
           path="/website"
           element={

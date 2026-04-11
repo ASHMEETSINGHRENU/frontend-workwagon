@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import bannerImg from "../photos/banner-4.png";
+import { LogIn } from "lucide-react";
 
 function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
