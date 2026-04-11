@@ -4,9 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { 
   FaBars, FaTimes, FaSearch, FaHome, FaLaptopCode, 
   FaImage, FaFileAlt, FaSignOutAlt, FaUserCircle, 
-  FaChevronDown, FaCog, FaUser, FaBriefcase
+  FaChevronDown, FaUser, FaBriefcase
 } from "react-icons/fa";
-
+//FaCog,
 function Navbar() {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);

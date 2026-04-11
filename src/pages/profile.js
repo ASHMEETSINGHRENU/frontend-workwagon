@@ -3,8 +3,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { 
   FaUser, FaEnvelope, FaCalendarAlt, FaVenusMars, FaMapMarkerAlt, 
   FaLock, FaCamera, FaSave, FaSpinner, FaCheckCircle, FaArrowLeft,
-  FaUserCircle, FaEdit, FaShieldAlt, FaClock, FaIdCard
+  FaUserCircle, FaShieldAlt, FaClock, FaIdCard
 } from "react-icons/fa";
+//FaEdit
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";

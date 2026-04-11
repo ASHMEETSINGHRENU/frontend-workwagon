@@ -4,8 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   FaSearch, FaTimes, FaExternalLinkAlt, FaGithub, 
   FaHeart, FaEye, FaCode, FaPaintBrush, FaChartLine,
-  FaLaptopCode, FaMobile, FaDatabase, FaServer
+  FaLaptopCode, FaDatabase
 } from 'react-icons/fa';
+
+// FaServer ,  FaMobile
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';

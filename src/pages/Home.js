@@ -1,9 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaSignOutAlt, FaArrowRight, FaCheckCircle, FaLaptopCode, FaPaintBrush, FaChartLine, FaHandshake, FaLightbulb, FaRocket, FaUserCheck, FaGem, FaEye } from "react-icons/fa";
+import { FaArrowRight, FaCheckCircle, FaLaptopCode, FaPaintBrush, FaChartLine, FaHandshake, FaLightbulb, FaRocket, FaUserCheck, FaGem, FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { Typewriter } from "react-simple-typewriter";
-import { Link } from "react-router-dom"; 
+// import { Link } from "react-router-dom"; 
 import Footer from '../components/Footer';
 import Chatbot from './chatbot';
 import websiteImg from "../photos/Websitegigs.png";
