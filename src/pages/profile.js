@@ -38,10 +38,14 @@ useEffect(() => {
 }, []); // ✅ EMPTY dependency
 
   // Handle input change
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+const handleChange = (e) => {
+  const { name, value } = e.target;
 
+  setForm((prev) => ({
+    ...prev,
+    [name]: value,
+  }));
+};
   // Handle image selection
   const handleFileChange = (e) => {
     const file = e.target.files[0];
