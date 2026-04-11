@@ -13,22 +13,22 @@ function Profile() {
   const [preview, setPreview] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const user = JSON.parse(localStorage.getItem("user"));
+const user = JSON.parse(localStorage.getItem("user"));
 
-  useEffect(() => {
-    if (user) {
-      setForm({
-        username: user.username || "",
-        age: user.age || "",
-        gender: user.gender || "",
-        address: user.address || "",
-      });
+useEffect(() => {
+  if (user) {
+    setForm({
+      username: user.username || "",
+      age: user.age || "",
+      gender: user.gender || "",
+      address: user.address || "",
+    });
 
-      if (user.profilePic) {
-        setPreview(`https://backend-workwagon.onrender.com/${user.profilePic}`);
-      }
+    if (user.profilePic) {
+      setPreview(`https://backend-workwagon.onrender.com/${user.profilePic}`);
     }
-  }, []);
+  }
+}, [user]); // ✅ FIXED
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
