@@ -1,5 +1,6 @@
 // src/pages/Portfolio.js
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+// useEffect
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   FaSearch, FaTimes, FaExternalLinkAlt, FaGithub, 
@@ -8,7 +9,6 @@ import {
 } from 'react-icons/fa';
 
 // FaServer ,  FaMobile
-import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
@@ -444,9 +444,10 @@ const Portfolio = () => {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                       <div className="absolute top-4 left-4">
-                        <span className={`px-3 py-1 rounded-full text-xs font-semibold text-white bg-gradient-to-r ${getCategoryColor(project.category)}`}>
-                          {project.category.toUpperCase()}
-                        </span>
+<span className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold text-white bg-gradient-to-r ${getCategoryColor(project.category)}`}>
+  {getCategoryIcon(project.category)}
+  {project.category.toUpperCase()}
+</span>
                       </div>
                       <div className="absolute bottom-4 left-4 right-4">
                         <h3 className="text-white font-bold text-lg">{project.title}</h3>
