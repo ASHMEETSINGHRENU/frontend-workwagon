@@ -153,7 +153,11 @@ function FreelancerLogo() {
             <input type="file" onChange={handleImageUpload} />
 
             {formData.image && (
-              <img src={formData.image} className="h-20 mt-2" />
+              <img
+  src={formData.image}
+  alt="Logo preview"
+  className="h-20 mt-2"
+/>
             )}
 
             <select name="level" value={formData.level} onChange={handleChange}>
