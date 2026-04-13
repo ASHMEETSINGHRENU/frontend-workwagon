@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
 import Footer from '../components/Footer';
 import { 
-  FaStar, FaCode, FaMobile, FaDatabase, FaServer, 
+  FaStar, FaCode, FaMobile,
   FaShoppingCart, FaWordpress, FaReact, FaNodeJs,
-  FaUserTie, FaClock, FaMedal, FaShieldAlt,
+  FaUserTie, FaMedal, FaShieldAlt,
   FaArrowRight, FaFilter, FaSearch, FaTimes
 } from "react-icons/fa";
 
