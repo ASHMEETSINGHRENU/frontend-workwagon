@@ -10,7 +10,7 @@ function FreelancerLogo() {
     name: "",
     rating: "",
     reviews: "",
-    image: "",
+    image : "",
     level: "",
     price: "",
     about: ""
@@ -99,7 +99,7 @@ const handleUpload = () => {
   // Create new logo gig
   const newGig = {
     id: Date.now(),
-    img: formData.image, 
+    image: formData.image, 
     name: formData.name, 
     level: formData.level, 
     title: formData.title,
@@ -279,7 +279,7 @@ const handleUpload = () => {
             formData.image && React.createElement(
               "div",
               { className: "mt-2" },
-              React.createElement("img", {
+              React.createElement("image", {
                 src: formData.image,
                 alt: "Preview",
                 className: "h-32 object-contain border rounded"
@@ -393,11 +393,11 @@ const handleUpload = () => {
             React.createElement(
               "div",
               { className: "flex space-x-4" },
-              gig.img && React.createElement(
+              gig.image && React.createElement(
                 "div",
                 { className: "flex-shrink-0" },
-                React.createElement("img", {
-                  src: gig.img,
+                React.createElement("image", {
+                  src: gig.image,
                   alt: gig.title,
                   className: "h-16 w-16 object-contain"
                 })
