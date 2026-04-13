@@ -58,79 +58,8 @@ function FreelancerLogo() {
 
 
 // Update the handleUpload function in freelancerLogo.js
-// const handleUpload = () => {
-//   // Validate all fields are filled
-//   if (
-//     !formData.title ||
-//     !formData.name ||
-//     !formData.rating ||
-//     !formData.reviews ||
-//     !formData.image ||
-//     !formData.level ||
-//     !formData.price ||
-//     !formData.about
-//   ) {
-//     alert("All fields are required. Please complete the logo design submission form.");
-//     return;
-//   }
-
-//   // Validate numeric fields
-//   if (isNaN(formData.rating) || formData.rating < 1 || formData.rating > 5) {
-//     alert("Please enter a valid rating between 1 and 5 stars");
-//     return;
-//   }
-
-//   if (isNaN(formData.reviews) || formData.reviews < 0) {
-//     alert("Number of reviews must be a positive number");
-//     return;
-//   }
-
-//   if (isNaN(formData.price) || formData.price <= 0) {
-//     alert("Price must be a positive amount");
-//     return;
-//   }
-
-//   // Validate image is uploaded (not just empty string)
-//   if (!formData.image.startsWith('data:image')) {
-//     alert("Please upload a valid logo image file");
-//     return;
-//   }
-
-//   // Create new logo gig
-//   const newGig = {
-//     id: Date.now(),
-//     img: formData.image, 
-//     name: formData.name, 
-//     level: formData.level, 
-//     title: formData.title,
-//     rating: parseFloat(formData.rating),
-//     reviews: parseInt(formData.reviews),
-//     price: `${parseFloat(formData.price).toFixed(2)}`,
-//     about: formData.about
-//   };
-
-//   try {
-//     const updatedGigs = [...logoGigs, newGig];
-//     localStorage.setItem("logoGigs", JSON.stringify(updatedGigs));
-//     setLogoGigs(updatedGigs);
-//     handleClear();
-//     alert("Logo design service successfully published!");
-//     navigate("/dashboard");
-//   } catch (error) {
-//     console.error("Failed to save logo gig:", error);
-//     alert("Failed to publish logo service. Please check your data and try again.");
-//   }
-// };
-
-//   const handleDelete = (id) => {
-//     const updatedGigs = logoGigs.filter(gig => gig.id !== id);
-//     setLogoGigs(updatedGigs);
-//     localStorage.setItem("logoGigs", JSON.stringify(updatedGigs));
-//     alert("Logo gig deleted successfully!");
-//   };
-
 const handleUpload = () => {
-  // Validate all fields
+  // Validate all fields are filled
   if (
     !formData.title ||
     !formData.name ||
@@ -141,32 +70,38 @@ const handleUpload = () => {
     !formData.price ||
     !formData.about
   ) {
-    alert("All fields are required. Please fill in all the information.");
+    alert("All fields are required. Please complete the logo design submission form.");
     return;
   }
 
-  // Additional validation for numeric fields
-  if (isNaN(formData.rating)) {
-    alert("Rating must be a number");
+  // Validate numeric fields
+  if (isNaN(formData.rating) || formData.rating < 1 || formData.rating > 5) {
+    alert("Please enter a valid rating between 1 and 5 stars");
     return;
   }
 
-  if (isNaN(formData.reviews)) {
-    alert("Reviews must be a number");
+  if (isNaN(formData.reviews) || formData.reviews < 0) {
+    alert("Number of reviews must be a positive number");
     return;
   }
 
-  if (isNaN(formData.price)) {
-    alert("Price must be a number");
+  if (isNaN(formData.price) || formData.price <= 0) {
+    alert("Price must be a positive amount");
     return;
   }
 
-  // Create new gig object
+  // Validate image is uploaded (not just empty string)
+  if (!formData.image.startsWith('data:image')) {
+    alert("Please upload a valid logo image file");
+    return;
+  }
+
+  // Create new logo gig
   const newGig = {
     id: Date.now(),
-    img: formData.image,
-    name: formData.name,
-    level: formData.level,
+    img: formData.image, 
+    name: formData.name, 
+    level: formData.level, 
     title: formData.title,
     rating: parseFloat(formData.rating),
     reviews: parseInt(formData.reviews),
@@ -175,25 +110,26 @@ const handleUpload = () => {
   };
 
   try {
-    const updatedGigs = [...websiteGigs, newGig];
-    localStorage.setItem("websiteGigs", JSON.stringify(updatedGigs));
-    setWebsiteGigs(updatedGigs);
+    const updatedGigs = [...logoGigs, newGig];
+    localStorage.setItem("logoGigs", JSON.stringify(updatedGigs));
+    setLogoGigs(updatedGigs);
     handleClear();
-    alert("Your gig has been successfully uploaded!");
+    alert("Logo design service successfully published!");
     navigate("/dashboard");
   } catch (error) {
-    console.error("Failed to save gig:", error);
-    alert("Failed to save gig. The storage might be full.");
+    console.error("Failed to save logo gig:", error);
+    alert("Failed to publish logo service. Please check your data and try again.");
   }
 };
 
-
   const handleDelete = (id) => {
-    const updatedGigs = websiteGigs.filter(gig => gig.id !== id);
-    setWebsiteGigs(updatedGigs);
-    localStorage.setItem("websiteGigs", JSON.stringify(updatedGigs));
-    alert("Website gig deleted successfully!");
+    const updatedGigs = logoGigs.filter(gig => gig.id !== id);
+    setLogoGigs(updatedGigs);
+    localStorage.setItem("logoGigs", JSON.stringify(updatedGigs));
+    alert("Logo gig deleted successfully!");
   };
+
+
 
   return React.createElement(
     React.Fragment,
@@ -461,7 +397,7 @@ const handleUpload = () => {
                 "div",
                 { className: "flex-shrink-0" },
                 React.createElement("img", {
-                  src: gig.image,
+                  src: gig.img,
                   alt: gig.title,
                   className: "h-16 w-16 object-contain"
                 })
