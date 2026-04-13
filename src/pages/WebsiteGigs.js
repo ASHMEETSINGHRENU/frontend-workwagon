@@ -342,40 +342,6 @@ export default function WebsiteGigs() {
           )}
         </div>
 
-        {/* CTA Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="relative mx-4 mb-12 rounded-3xl overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600" />
-          <div className="absolute inset-0 overflow-hidden">
-            <motion.div
-              animate={{ x: [0, 100, 0], y: [0, -50, 0] }}
-              transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-              className="absolute -top-20 -right-20 w-60 h-60 bg-white/20 rounded-full blur-3xl"
-            />
-          </div>
-          
-          <div className="relative z-10 p-8 md:p-12 text-center text-white">
-            <h3 className="text-2xl md:text-3xl font-bold mb-3">
-              Ready to Build Your Dream Website?
-            </h3>
-            <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-              Post your project and get proposals from top-rated freelancers within 24 hours
-            </p>
-            <Link to="/post-project">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-6 py-3 bg-white text-blue-600 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all"
-              >
-                Post a Project
-              </motion.button>
-            </Link>
-          </div>
-        </motion.div>
       </div>
 
       <Footer />
