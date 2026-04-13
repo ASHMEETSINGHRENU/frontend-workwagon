@@ -111,8 +111,8 @@ const handleUpload = () => {
 
   try {
     const updatedGigs = [...logoGigs, newGig];
-    setLogoGigs(updatedGigs);
     localStorage.setItem("logoGigs", JSON.stringify(updatedGigs));
+    setLogoGigs(updatedGigs);
     handleClear();
     alert("Logo design service successfully published!");
     navigate("/dashboard");
