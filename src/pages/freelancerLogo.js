@@ -393,7 +393,7 @@ const handleUpload = () => {
             React.createElement(
               "div",
               { className: "flex space-x-4" },
-              gig.image && React.createElement(
+              gig.img && React.createElement(
                 "div",
                 { className: "flex-shrink-0" },
                 React.createElement("img", {
