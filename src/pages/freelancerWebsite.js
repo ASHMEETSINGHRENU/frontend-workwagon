@@ -120,33 +120,6 @@ const handleUpload = () => {
   };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
   return React.createElement(
 
