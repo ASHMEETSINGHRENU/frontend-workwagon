@@ -29,9 +29,9 @@ export default function LogoGigs() {
             <div key={gig.id} className="relative">
               <Link to={`/logogigs/${gig.id}`}>
                 <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
-                  {gig.img && (
+                  {gig.image && (
                     <img
-                      src={gig.img}
+                      src={gig.image}
                       alt={gig.name}
                       className="w-full h-40 object-cover"
                     />
