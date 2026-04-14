@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { 
-  FaStar, FaStarHalfAlt, FaRegStar, 
-  FaClock, FaCheckCircle, FaShieldAlt, FaTrophy, 
-  FaPaintBrush, FaPalette, FaPenFancy, FaVectorSquare,
+  FaStar, FaStarHalfAlt, FaRegStar,  
+  FaClock, FaCheckCircle, FaShieldAlt, FaTrophy,
+  FaPaintBrush, FaPalette, FaPenFancy, FaImage, FaVectorSquare,
   FaHeart, FaShare, FaArrowLeft, FaWhatsapp, FaEnvelope,
-  FaCreditCard, FaLock, FaUserTie,
-  FaImage, FaFont, FaEye, FaRegLightbulb
+  FaCreditCard, FaLock, FaUserTie, FaEye,
+  FaRegGem
 } from "react-icons/fa";
 
 const SingleLogoGig = () => {
@@ -19,7 +19,6 @@ const SingleLogoGig = () => {
   const [loading, setLoading] = useState(true);
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState("standard");
-  const [setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     const savedGigs = localStorage.getItem("logoGigs");
@@ -59,12 +58,13 @@ const SingleLogoGig = () => {
       price: "$99",
       description: "Perfect for startups and small businesses",
       features: [
-        "1 Custom Logo Concept",
-        "2 Revisions",
-        "High-resolution PNG & JPG",
+        "1 Unique Logo Concept",
+        "High Resolution Files (PNG, JPG)",
+        "Source File (AI/EPS)",
         "Basic Color Palette",
-        "3 Business Days Delivery",
-        "Source File (AI/PSD)"
+        "2 Revisions",
+        "1 Week Delivery",
+        "Commercial Rights"
       ],
       delivery: "3-5 Days",
       color: "from-blue-500 to-cyan-500"
@@ -72,58 +72,58 @@ const SingleLogoGig = () => {
     {
       id: "standard",
       name: "Standard Logo Package",
-      price: "$199",
+      price: "$249",
       description: "Ideal for growing brands",
       features: [
-        "3 Custom Logo Concepts",
-        "5 Revisions",
-        "High-resolution PNG, JPG, SVG",
+        "3 Unique Logo Concepts",
+        "High Resolution Files (PNG, JPG, SVG)",
+        "Source File (AI/EPS/PSD)",
         "Complete Color Palette",
-        "Font Recommendations",
-        "Source Files (AI/PSD/EPS)",
+        "5 Revisions",
+        "Brand Guidelines",
         "Social Media Kit",
-        "5 Business Days Delivery",
-        "Brand Guidelines"
+        "Favicon Design",
+        "Commercial Rights"
       ],
-      delivery: "5-7 Days",
+      delivery: "7-10 Days",
       popular: true,
       color: "from-purple-500 to-pink-500"
     },
     {
       id: "premium",
-      name: "Premium Brand Identity",
+      name: "Premium Logo Package",
       price: "$499",
-      description: "Complete brand identity solution",
+      description: "Complete branding solution",
       features: [
-        "5+ Custom Logo Concepts",
+        "5+ Unique Logo Concepts",
+        "All File Formats",
+        "Source Files (All Formats)",
+        "Complete Brand Identity",
         "Unlimited Revisions",
-        "All File Formats (PNG, JPG, SVG, PDF, EPS)",
-        "Complete Brand Color Palette",
-        "Custom Typography",
+        "Detailed Brand Guidelines",
+        "Complete Social Media Kit",
         "Business Card Design",
         "Letterhead Design",
-        "Social Media Kit",
-        "Brand Guidelines Document",
-        "Source Files",
-        "Priority Support"
+        "Email Signature",
+        "Full Commercial Rights"
       ],
-      delivery: "7-10 Days",
+      delivery: "14-21 Days",
       color: "from-orange-500 to-red-500"
     }
   ];
 
-  const designStyles = [
-    { icon: <FaPaintBrush />, name: "Minimalist", level: 95 },
-    { icon: <FaVectorSquare />, name: "Modern", level: 98 },
-    { icon: <FaPenFancy />, name: "Hand-drawn", level: 85 },
-    { icon: <FaPalette />, name: "Creative", level: 92 },
-    { icon: <FaFont />, name: "Typography", level: 88 },
+  const designSkills = [
+    { icon: <FaPaintBrush />, name: "Logo Design", level: 98 },
+    { icon: <FaPalette />, name: "Color Theory", level: 95 },
+    { icon: <FaPenFancy />, name: "Typography", level: 92 },
+    { icon: <FaVectorSquare />, name: "Vector Graphics", level: 96 },
+    { icon: <FaImage />, name: "Brand Identity", level: 94 },
   ];
 
-  const portfolioImages = [
-    "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&h=500&fit=crop",
-    "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=800&h=500&fit=crop",
-    "https://images.unsplash.com/photo-1626785774623-cdff8e6f6d8e?w=800&h=500&fit=crop",
+  const portfolioItems = [
+    "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=400&h=300&fit=crop",
+    "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=400&h=300&fit=crop",
+    "https://images.unsplash.com/photo-1626785774623-cdff8e6f6d8e?w=400&h=300&fit=crop",
   ];
 
   const renderStars = (rating) => {
@@ -295,29 +295,6 @@ const SingleLogoGig = () => {
                 </div>
               </motion.div>
 
-              {/* Portfolio Showcase */}
-              <motion.div variants={sectionVariants} className="bg-white/40 backdrop-blur-xl rounded-3xl p-6 md:p-8 shadow-xl border border-white/50">
-                <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                  <FaImage className="text-purple-500" />
-                  Portfolio Showcase
-                </h2>
-                <div className="grid grid-cols-3 gap-3">
-                  {portfolioImages.map((img, idx) => (
-                    <motion.div
-                      key={idx}
-                      whileHover={{ scale: 1.05 }}
-                      className="relative h-32 rounded-lg overflow-hidden cursor-pointer"
-                      onClick={() => setCurrentImageIndex(idx)}
-                    >
-                      <img src={img} alt={`Portfolio ${idx + 1}`} className="w-full h-full object-cover" />
-                      <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <FaEye className="text-white" />
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-
               {/* About Section */}
               <motion.div variants={sectionVariants} className="bg-white/40 backdrop-blur-xl rounded-3xl p-6 md:p-8 shadow-xl border border-white/50">
                 <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
@@ -334,35 +311,57 @@ const SingleLogoGig = () => {
                   </div>
                 </div>
                 <p className="text-gray-600 leading-relaxed whitespace-pre-line">
-                  {gig.about || "Creative logo designer with a passion for creating unique brand identities. Specialized in minimalist, modern, and custom logo designs that help businesses stand out. With years of experience working with global brands, I deliver high-quality designs that capture your brand's essence."}
+                  {gig.about || "Creative logo designer with over 5 years of experience in brand identity design. Specialized in creating unique, memorable logos that help businesses stand out. I combine creativity with strategic thinking to deliver designs that truly represent your brand."}
                 </p>
               </motion.div>
 
-              {/* Design Styles Section */}
+              {/* Design Skills Section */}
               <motion.div variants={sectionVariants} className="bg-white/40 backdrop-blur-xl rounded-3xl p-6 md:p-8 shadow-xl border border-white/50">
                 <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
-                  <FaPalette className="text-green-500" />
+                  <FaPaintBrush className="text-purple-500" />
                   Design Expertise
                 </h2>
                 <div className="space-y-4">
-                  {designStyles.map((style, idx) => (
+                  {designSkills.map((skill, idx) => (
                     <div key={idx}>
                       <div className="flex justify-between items-center mb-2">
                         <div className="flex items-center gap-2">
-                          <span className="text-gray-600">{style.icon}</span>
-                          <span className="text-gray-700 font-medium">{style.name}</span>
+                          <span className="text-gray-600">{skill.icon}</span>
+                          <span className="text-gray-700 font-medium">{skill.name}</span>
                         </div>
-                        <span className="text-gray-600">{style.level}%</span>
+                        <span className="text-gray-600">{skill.level}%</span>
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
                         <motion.div
                           initial={{ width: 0 }}
-                          animate={{ width: `${style.level}%` }}
+                          animate={{ width: `${skill.level}%` }}
                           transition={{ duration: 1, delay: idx * 0.1 }}
                           className="h-full rounded-full bg-gradient-to-r from-purple-500 to-pink-600"
                         />
                       </div>
                     </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Portfolio Showcase */}
+              <motion.div variants={sectionVariants} className="bg-white/40 backdrop-blur-xl rounded-3xl p-6 md:p-8 shadow-xl border border-white/50">
+                <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                  <FaEye className="text-purple-500" />
+                  Recent Work
+                </h2>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  {portfolioItems.map((item, idx) => (
+                    <motion.div
+                      key={idx}
+                      whileHover={{ scale: 1.05 }}
+                      className="relative rounded-xl overflow-hidden cursor-pointer group"
+                    >
+                      <img src={item} alt={`Portfolio ${idx + 1}`} className="w-full h-32 object-cover" />
+                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <FaEye className="text-white text-xl" />
+                      </div>
+                    </motion.div>
                   ))}
                 </div>
               </motion.div>
@@ -482,8 +481,8 @@ const SingleLogoGig = () => {
                         <p className="text-xs text-gray-500">Quality Guarantee</p>
                       </div>
                       <div>
-                        <FaRegLightbulb className="text-gray-400 text-xl mx-auto mb-1" />
-                        <p className="text-xs text-gray-500">Unique Designs</p>
+                        <FaRegGem className="text-gray-400 text-xl mx-auto mb-1" />
+                        <p className="text-xs text-gray-500">Unique Design</p>
                       </div>
                     </div>
                   </div>
@@ -517,9 +516,9 @@ const SingleLogoGig = () => {
                     </div>
                   </div>
                   <p className="text-gray-600">
-                    {idx === 0 && "Amazing logo design! The designer understood exactly what I wanted and delivered beyond expectations. Highly recommended!"}
-                    {idx === 1 && "Great communication and creative ideas. The logo perfectly represents my brand. Will definitely work again!"}
-                    {idx === 2 && "Professional designer with exceptional skills. The final logo exceeded my expectations. Fast delivery and great quality!"}
+                    {idx === 0 && "Amazing designer! The logo exceeded my expectations. Very creative and professional!"}
+                    {idx === 1 && "Great communication and delivered multiple concepts. Very happy with the final design!"}
+                    {idx === 2 && "Best logo designer on the platform. Understood my brand vision perfectly. Highly recommend!"}
                   </p>
                 </div>
               ))}
