@@ -16,6 +16,7 @@ function FreelancerSEO() {
   });
   const [seoGigs, setSeoGigs] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
+  const [useHighQuality, setUseHighQuality] = useState(true); // New state for quality toggle
 
   // Load saved gigs from localStorage on component mount
   useEffect(() => {
@@ -38,8 +39,8 @@ function FreelancerSEO() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  // Compress image before storing
-  const compressImage = (dataUrl, maxSizeKB = 100) => {
+  // Improved compressImage with better quality
+  const compressImage = (dataUrl, options = {}) => {
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => {
@@ -47,8 +48,8 @@ function FreelancerSEO() {
         let width = img.width;
         let height = img.height;
         
-        // Calculate new dimensions (max 300px width/height for thumbnails)
-        const maxDimension = 300;
+        // Allow larger images - max 1000px for better quality
+        const maxDimension = options.maxDimension || 1000;
         if (width > height && width > maxDimension) {
           height = (height * maxDimension) / width;
           width = maxDimension;
@@ -62,13 +63,14 @@ function FreelancerSEO() {
         const ctx = canvas.getContext('2d');
         ctx.drawImage(img, 0, 0, width, height);
         
-        // Try different quality levels
-        let quality = 0.7;
-        let resultDataUrl = canvas.toDataURL('image/jpeg', quality);
-        
-        // Reduce quality until size is under limit or quality is too low
-        while (resultDataUrl.length > maxSizeKB * 1024 && quality > 0.3) {
-          quality -= 0.1;
+        // Better quality settings
+        let resultDataUrl;
+        if (options.usePNG || options.isLogo) {
+          // Use PNG for logos and images with text (no quality loss)
+          resultDataUrl = canvas.toDataURL('image/png');
+        } else {
+          // Use JPEG with high quality for photos
+          const quality = options.quality || 0.92; // 92% quality
           resultDataUrl = canvas.toDataURL('image/jpeg', quality);
         }
         
@@ -87,9 +89,9 @@ function FreelancerSEO() {
         return;
       }
       
-      // Validate file size (max 2MB before compression)
-      if (file.size > 2 * 1024 * 1024) {
-        alert("Image size should be less than 2MB");
+      // Increased max file size to 8MB
+      if (file.size > 8 * 1024 * 1024) {
+        alert("Image size should be less than 8MB");
         return;
       }
       
@@ -98,10 +100,17 @@ function FreelancerSEO() {
       const reader = new FileReader();
       reader.onloadend = async () => {
         try {
-          // Compress the image
-          const compressedImage = await compressImage(reader.result, 80);
+          // Use high quality settings
+          const compressedImage = await compressImage(reader.result, {
+            maxDimension: 1000,  // 1000px max (good balance)
+            quality: 0.92,       // 92% quality (almost original)
+            usePNG: file.type === 'image/png' || useHighQuality
+          });
+          
+          const sizeInKB = (compressedImage.length / 1024).toFixed(2);
+          alert(`✅ Image uploaded!\nSize: ${sizeInKB} KB\nQuality: High (${useHighQuality ? 'PNG/High JPEG' : 'Standard JPEG'})`);
+          
           setFormData(prev => ({ ...prev, image: compressedImage }));
-          alert("Image uploaded and compressed successfully!");
         } catch (error) {
           console.error("Failed to compress image:", error);
           alert("Failed to process image. Please try a different image.");
@@ -199,9 +208,9 @@ function FreelancerSEO() {
     const newDataStr = JSON.stringify(updatedGigs);
     const sizeInKB = newDataStr.length / 1024;
     
-    // localStorage limit is typically 5MB (5120 KB)
+    // Increased limit warning to 4.5MB (leaving room for other data)
     if (sizeInKB > 4500) {
-      alert(`Storage limit reached! Your data size is ${sizeInKB.toFixed(2)} KB. Please delete some existing gigs before adding new ones.`);
+      alert(`⚠️ Storage limit warning! Your data size is ${sizeInKB.toFixed(2)} KB.\nPlease delete some existing gigs before adding new ones.`);
       return;
     }
 
@@ -209,12 +218,12 @@ function FreelancerSEO() {
       localStorage.setItem("seoGigs", JSON.stringify(updatedGigs));
       setSeoGigs(updatedGigs);
       handleClear();
-      alert(`SEO service has been successfully listed! (Size: ${sizeInKB.toFixed(2)} KB)`);
+      alert(`✅ SEO service successfully listed!\n📊 Storage used: ${sizeInKB.toFixed(2)} KB`);
       navigate("/dashboard");
     } catch (error) {
       console.error("Failed to save SEO gig:", error);
       if (error.name === "QuotaExceededError") {
-        alert("Storage quota exceeded! Please delete some existing gigs or use smaller images.");
+        alert("❌ Storage quota exceeded!\n\nSolutions:\n1. Delete some existing gigs\n2. Use smaller images\n3. Clear browser cache");
       } else {
         alert("Failed to save SEO gig: " + error.message);
       }
@@ -222,14 +231,16 @@ function FreelancerSEO() {
   };
 
   const handleDelete = (id) => {
-    const updatedGigs = seoGigs.filter(gig => gig.id !== id);
-    try {
-      localStorage.setItem("seoGigs", JSON.stringify(updatedGigs));
-      setSeoGigs(updatedGigs);
-      alert("SEO gig deleted successfully!");
-    } catch (error) {
-      console.error("Failed to delete:", error);
-      alert("Failed to delete gig");
+    if (window.confirm("Are you sure you want to delete this gig?")) {
+      const updatedGigs = seoGigs.filter(gig => gig.id !== id);
+      try {
+        localStorage.setItem("seoGigs", JSON.stringify(updatedGigs));
+        setSeoGigs(updatedGigs);
+        alert("✅ SEO gig deleted successfully!");
+      } catch (error) {
+        console.error("Failed to delete:", error);
+        alert("Failed to delete gig");
+      }
     }
   };
 
@@ -257,10 +268,30 @@ function FreelancerSEO() {
             { className: "text-gray-600" },
             "Create your SEO service offering"
           ),
+          // Quality toggle
+          React.createElement(
+            "div",
+            { className: "mt-4 flex items-center justify-center gap-4" },
+            React.createElement(
+              "label",
+              { className: "flex items-center gap-2" },
+              React.createElement("input", {
+                type: "checkbox",
+                checked: useHighQuality,
+                onChange: (e) => setUseHighQuality(e.target.checked),
+                className: "w-4 h-4 text-blue-600"
+              }),
+              React.createElement(
+                "span",
+                { className: "text-sm text-gray-700" },
+                "High Quality Mode (PNG/Better JPEG - Larger file size)"
+              )
+            )
+          ),
           seoGigs.length > 0 && React.createElement(
             "p",
             { className: "text-sm text-gray-500 mt-2" },
-            `Current gigs: ${seoGigs.length} | Storage used: ${(JSON.stringify(seoGigs).length / 1024).toFixed(2)} KB / ~5000 KB`
+            `📦 Current gigs: ${seoGigs.length} | 💾 Storage: ${(JSON.stringify(seoGigs).length / 1024).toFixed(2)} KB / 5000 KB`
           )
         ),
         // Main Form
@@ -314,7 +345,7 @@ function FreelancerSEO() {
               React.createElement(
                 "label",
                 { htmlFor: "rating", className: "block text-sm font-medium text-gray-700 mb-1" },
-                "Rating"
+                "Rating (0-5)"
               ),
               React.createElement("input", {
                 type: "number",
@@ -354,7 +385,7 @@ function FreelancerSEO() {
               React.createElement(
                 "label",
                 { htmlFor: "image", className: "block text-sm font-medium text-gray-700 mb-1" },
-                "Service Image (Max 2MB, will be compressed)"
+                "Service Image (Max 8MB)"
               ),
               React.createElement("input", {
                 type: "file",
@@ -368,7 +399,7 @@ function FreelancerSEO() {
               isUploading && React.createElement(
                 "p",
                 { className: "text-sm text-blue-600 mt-1" },
-                "Processing image..."
+                "⏳ Processing image..."
               ),
               formData.image && React.createElement(
                 "div",
@@ -376,12 +407,13 @@ function FreelancerSEO() {
                 React.createElement("img", {
                   src: formData.image,
                   alt: "Preview",
-                  className: "h-32 object-contain border rounded"
+                  className: "h-48 object-contain border rounded", // Increased preview size
+                  style: { maxWidth: '100%' }
                 }),
                 React.createElement(
                   "p",
                   { className: "text-xs text-gray-500 mt-1" },
-                  `Image size: ${(formData.image.length / 1024).toFixed(2)} KB`
+                  `📏 Size: ${(formData.image.length / 1024).toFixed(2)} KB | ${useHighQuality ? '🎨 High Quality Mode' : '📸 Standard Quality'}`
                 )
               )
             ),
@@ -416,7 +448,7 @@ function FreelancerSEO() {
               React.createElement(
                 "label",
                 { htmlFor: "price", className: "block text-sm font-medium text-gray-700 mb-1" },
-                "Price*"
+                "Price ($)*"
               ),
               React.createElement("input", {
                 type: "number",
@@ -480,7 +512,7 @@ function FreelancerSEO() {
             React.createElement(
               "h2",
               { className: "text-lg font-medium text-gray-900 mb-4" },
-              "Your SEO Gigs"
+              `Your SEO Gigs (${seoGigs.length})`
             ),
             React.createElement(
               "div",
@@ -499,7 +531,7 @@ function FreelancerSEO() {
                         React.createElement("img", {
                           src: gig.img,
                           alt: gig.title,
-                          className: "h-16 w-16 object-contain"
+                          className: "h-24 w-24 object-contain border rounded", // Larger preview
                         })
                       ),
                     React.createElement(
@@ -528,7 +560,7 @@ function FreelancerSEO() {
                       ),
                       React.createElement(
                         "p",
-                        { className: "font-medium" },
+                        { className: "font-medium text-lg" },
                         gig.price && `$${gig.price}`
                       )
                     )
