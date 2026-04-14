@@ -33,9 +33,24 @@ function FreelancerLogo() {
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
+      // Validate file type
+      if (!file.type.startsWith('image/')) {
+        alert("Please upload a valid image file (JPEG, PNG, GIF, etc.)");
+        return;
+      }
+      
+      // Validate file size (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        alert("Image size should be less than 5MB");
+        return;
+      }
+      
       const reader = new FileReader();
       reader.onloadend = () => {
         setFormData(prev => ({ ...prev, image: reader.result }));
+      };
+      reader.onerror = () => {
+        alert("Failed to read image file. Please try again.");
       };
       reader.readAsDataURL(file);
     }
@@ -71,24 +86,27 @@ function FreelancerLogo() {
     }
 
     // Validate numeric fields
-    if (isNaN(formData.rating) || formData.rating < 1 || formData.rating > 5) {
-      alert("Please enter a valid rating between 1 and 5 stars");
+    const ratingNum = parseFloat(formData.rating);
+    if (isNaN(ratingNum) || ratingNum < 0 || ratingNum > 5) {
+      alert("Please enter a valid rating between 0 and 5 stars");
       return;
     }
 
-    if (isNaN(formData.reviews) || formData.reviews < 0) {
+    const reviewsNum = parseInt(formData.reviews);
+    if (isNaN(reviewsNum) || reviewsNum < 0) {
       alert("Number of reviews must be a positive number");
       return;
     }
 
-    if (isNaN(formData.price) || formData.price <= 0) {
+    const priceNum = parseFloat(formData.price);
+    if (isNaN(priceNum) || priceNum <= 0) {
       alert("Price must be a positive amount");
       return;
     }
 
-    // Validate image is uploaded
-    if (!formData.image.startsWith('data:image')) {
-      alert("Please upload a valid logo image file");
+    // REMOVED the strict image validation - just check if image exists
+    if (!formData.image) {
+      alert("Please upload a logo image");
       return;
     }
 
@@ -99,9 +117,9 @@ function FreelancerLogo() {
       name: formData.name,
       level: formData.level,
       title: formData.title,
-      rating: parseFloat(formData.rating),
-      reviews: parseInt(formData.reviews),
-      price: `${parseFloat(formData.price).toFixed(2)}`,
+      rating: ratingNum,
+      reviews: reviewsNum,
+      price: priceNum.toFixed(2),
       about: formData.about
     };
 
@@ -114,7 +132,7 @@ function FreelancerLogo() {
       navigate("/dashboard");
     } catch (error) {
       console.error("Failed to save logo gig:", error);
-      alert("Failed to publish logo service. Please check your data and try again.");
+      alert("Failed to publish logo service. Error: " + error.message);
     }
   };
 
@@ -254,7 +272,7 @@ function FreelancerLogo() {
               formData.image && React.createElement(
                 "div",
                 { className: "mt-2" },
-                React.createElement("img", {  // Fixed: changed from "image" to "img"
+                React.createElement("img", {
                   src: formData.image,
                   alt: "Preview",
                   className: "h-32 object-contain border rounded"
@@ -371,7 +389,7 @@ function FreelancerLogo() {
                       React.createElement(
                         "div",
                         { className: "flex-shrink-0" },
-                        React.createElement("img", {  // Fixed: changed from "image" to "img"
+                        React.createElement("img", {
                           src: gig.image,
                           alt: gig.title,
                           className: "h-16 w-16 object-contain"
@@ -404,7 +422,7 @@ function FreelancerLogo() {
                       React.createElement(
                         "p",
                         { className: "font-medium" },
-                        gig.price && `$${parseFloat(gig.price).toFixed(2)}`
+                        gig.price && `$${gig.price}`
                       )
                     )
                   ),
