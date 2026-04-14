@@ -7,7 +7,7 @@ import {
   FaStar, FaChartLine, FaSearch, FaGoogle, FaTachometerAlt,
   FaUserTie, FaMedal, FaShieldAlt,
   FaArrowRight, FaFilter, FaTimes, 
-  FaKeywords, FaLink, FaFileAlt, 
+  FaLink, FaFileAlt, 
 } from "react-icons/fa";
 
 export default function SEOGigs() {
