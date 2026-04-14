@@ -4,10 +4,10 @@ import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
 import Footer from '../components/Footer';
 import { 
-  FaStar, FaChartLine, FaSearch, FaGoogle, FaTachometerAlt,
+  FaStar, FaChartLine, FaSearch, FaGoogle, FaArrowUp, 
   FaUserTie, FaMedal, FaShieldAlt,
-  FaArrowRight, FaFilter, FaTimes, 
-  FaLink, FaFileAlt, 
+  FaArrowRight, FaFilter, FaSearch as FaSearchIcon, FaTimes,
+  FaDatabase, FaTachometerAlt, FaLink, FaFileAlt
 } from "react-icons/fa";
 
 export default function SEOGigs() {
@@ -72,23 +72,24 @@ export default function SEOGigs() {
       case 'intermediate':
         return { color: 'from-blue-500 to-cyan-500', bg: 'bg-blue-50', text: 'Intermediate' };
       case 'expert':
-        return { color: 'from-orange-500 to-red-500', bg: 'bg-orange-50', text: 'Expert' };
+        return { color: 'from-purple-500 to-pink-500', bg: 'bg-purple-50', text: 'Expert' };
       default:
         return { color: 'from-gray-500 to-gray-600', bg: 'bg-gray-50', text: level || 'Standard' };
     }
   };
 
-  const getSeoSpecialties = (title) => {
-    const specialties = [];
-    if (title?.toLowerCase().includes('local')) specialties.push({ icon: <FaMapMarkerAlt />, name: 'Local SEO' });
-    if (title?.toLowerCase().includes('ecommerce')) specialties.push({ icon: <FaShoppingCart />, name: 'E-commerce' });
-    if (title?.toLowerCase().includes('technical')) specialties.push({ icon: <FaCode />, name: 'Technical SEO' });
-    if (title?.toLowerCase().includes('content')) specialties.push({ icon: <FaFileAlt />, name: 'Content SEO' });
-    if (specialties.length === 0) {
-      specialties.push({ icon: <FaKeywords />, name: 'Keyword Research' });
-      specialties.push({ icon: <FaLink />, name: 'Link Building' });
+  const getSeoExpertise = (title) => {
+    const expertise = [];
+    if (title?.toLowerCase().includes('keyword')) expertise.push({ icon: <FaSearch />, name: 'Keyword Research' });
+    if (title?.toLowerCase().includes('on-page')) expertise.push({ icon: <FaFileAlt />, name: 'On-Page SEO' });
+    if (title?.toLowerCase().includes('technical')) expertise.push({ icon: <FaTachometerAlt />, name: 'Technical SEO' });
+    if (title?.toLowerCase().includes('link')) expertise.push({ icon: <FaLink />, name: 'Link Building' });
+    if (title?.toLowerCase().includes('local')) expertise.push({ icon: <FaGoogle />, name: 'Local SEO' });
+    if (expertise.length === 0) {
+      expertise.push({ icon: <FaChartLine />, name: 'SEO Strategy' });
+      expertise.push({ icon: <FaDatabase />, name: 'Analytics' });
     }
-    return specialties.slice(0, 2);
+    return expertise.slice(0, 2);
   };
 
   const levels = [
@@ -97,11 +98,6 @@ export default function SEOGigs() {
     { value: "intermediate", label: "Intermediate", icon: <FaShieldAlt /> },
     { value: "expert", label: "Expert", icon: <FaStar /> }
   ];
-
-  // Import FaMapMarkerAlt and FaShoppingCart if not already imported
-  const FaMapMarkerAlt = () => <span>📍</span>;
-  const FaShoppingCart = () => <span>🛒</span>;
-  const FaCode = () => <span>💻</span>;
 
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-100">
@@ -161,10 +157,10 @@ export default function SEOGigs() {
                 <span className="text-sm font-medium">SEO Specialists</span>
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-                Top-Rated SEO Experts
+                Expert SEO Consultants
               </h1>
               <p className="text-lg md:text-xl text-green-100 max-w-2xl mx-auto">
-                Hire experienced SEO professionals to boost your rankings and drive organic traffic
+                Hire professional SEO experts to boost your rankings and drive organic traffic
               </p>
             </motion.div>
           </div>
@@ -176,10 +172,10 @@ export default function SEOGigs() {
             <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
               {/* Search Bar */}
               <div className="relative w-full md:w-96">
-                <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm" />
+                <FaSearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm" />
                 <input
                   type="text"
-                  placeholder="Search SEO experts by name, specialty, or level..."
+                  placeholder="Search specialists by name, expertise, or level..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full pl-10 pr-10 py-2 rounded-full border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-400 transition-all"
@@ -242,7 +238,7 @@ export default function SEOGigs() {
               className="text-center py-20"
             >
               <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-xl font-semibold text-gray-700 mb-2">No SEO experts found</h3>
+              <h3 className="text-xl font-semibold text-gray-700 mb-2">No specialists found</h3>
               <p className="text-gray-500">Try adjusting your search or filter criteria</p>
             </motion.div>
           ) : (
@@ -254,7 +250,7 @@ export default function SEOGigs() {
             >
               {filteredGigs.map((gig) => {
                 const levelBadge = getLevelBadge(gig.level);
-                const seoSpecialties = getSeoSpecialties(gig.title);
+                const seoExpertise = getSeoExpertise(gig.title);
                 
                 return (
                   <motion.div
@@ -294,16 +290,16 @@ export default function SEOGigs() {
                             <span className="text-xs text-gray-300">({gig.reviews || 128})</span>
                           </div>
 
-                          {/* Success Rate Badge */}
+                          {/* Results Badge */}
                           <div className="absolute bottom-4 right-4 flex items-center gap-1 px-2 py-1 rounded-full bg-black/50 backdrop-blur-sm text-white text-xs">
-                            <FaTachometerAlt className="text-xs" />
-                            <span>98% Success</span>
+                            <FaArrowUp className="text-xs" />
+                            <span>Top Ranker</span>
                           </div>
                         </div>
 
                         {/* Content Section */}
                         <div className="p-5">
-                          {/* Expert Name */}
+                          {/* Specialist Name */}
                           <div className="flex items-center justify-between mb-2">
                             <h3 className="font-bold text-lg text-gray-800 group-hover:text-green-600 transition-colors">
                               {gig.name}
@@ -319,18 +315,14 @@ export default function SEOGigs() {
                             {gig.title}
                           </p>
                           
-                          {/* SEO Specialties */}
+                          {/* SEO Expertise */}
                           <div className="flex flex-wrap gap-2 mb-4">
-                            {seoSpecialties.map((specialty, idx) => (
+                            {seoExpertise.map((exp, idx) => (
                               <span key={idx} className="flex items-center gap-1 text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded-full">
-                                {specialty.icon}
-                                <span>{specialty.name}</span>
+                                {exp.icon}
+                                <span>{exp.name}</span>
                               </span>
                             ))}
-                            <span className="flex items-center gap-1 text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded-full">
-                              <FaGoogle className="text-xs" />
-                              <span>Google Certified</span>
-                            </span>
                           </div>
                           
                           {/* Footer */}
@@ -378,7 +370,7 @@ export default function SEOGigs() {
               Ready to Rank Higher on Google?
             </h3>
             <p className="text-green-100 mb-6 max-w-2xl mx-auto">
-              Get expert SEO services to improve your search rankings and drive more organic traffic
+              Get expert SEO strategies to boost your website's visibility and drive organic traffic
             </p>
             <Link to="/post-project">
               <motion.button
