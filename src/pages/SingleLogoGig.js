@@ -19,7 +19,7 @@ const SingleLogoGig = () => {
   const [loading, setLoading] = useState(true);
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState("standard");
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     const savedGigs = localStorage.getItem("logoGigs");
