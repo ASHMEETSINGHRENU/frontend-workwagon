@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaArrowRight, FaCheckCircle, FaLaptopCode, FaPaintBrush, FaChartLine, FaHandshake, FaLightbulb, FaRocket, FaUserCheck, FaGem, FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -34,6 +34,40 @@ function Home() {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
 
+  // Check if user is logged in
+  const isLoggedIn = !!user;
+
+  // Handle click anywhere on the page
+  const handlePageClick = (e) => {
+    // Don't show alert if user is already logged in
+    if (isLoggedIn) return;
+    
+    // Don't show alert if clicking on buttons or interactive elements that already have handlers
+    const target = e.target;
+    const isInteractive = target.closest('button') || 
+                         target.closest('a') || 
+                         target.closest('[role="button"]') ||
+                         target.closest('.no-alert');
+    
+    if (!isInteractive) {
+      const userChoice = window.confirm("You need to login to access all features. Do you want to login now?");
+      
+      if (userChoice) {
+        navigate("/login");
+      }
+    }
+  };
+
+  // Add click event listener to the document
+  useEffect(() => {
+    if (!isLoggedIn) {
+      document.addEventListener('click', handlePageClick);
+      return () => {
+        document.removeEventListener('click', handlePageClick);
+      };
+    }
+  }, [isLoggedIn]);
+
   const handleLogout = () => {
     const confirmLogout = window.confirm("Are you sure you want to logout?");
     if (confirmLogout) {
@@ -42,9 +76,38 @@ function Home() {
     }
   };
 
-  const navigateToLogo = () => navigate("/logogigs");
-  const navigateToWebsite = () => navigate("/website");
-  const navigateToSEO = () => navigate("/SEO");
+  const navigateToLogo = () => {
+    if (!isLoggedIn) {
+      const userChoice = window.confirm("You need to login to access Logo services. Do you want to login now?");
+      if (userChoice) {
+        navigate("/login");
+      }
+      return;
+    }
+    navigate("/logogigs");
+  };
+  
+  const navigateToWebsite = () => {
+    if (!isLoggedIn) {
+      const userChoice = window.confirm("You need to login to access Website services. Do you want to login now?");
+      if (userChoice) {
+        navigate("/login");
+      }
+      return;
+    }
+    navigate("/website");
+  };
+  
+  const navigateToSEO = () => {
+    if (!isLoggedIn) {
+      const userChoice = window.confirm("You need to login to access SEO services. Do you want to login now?");
+      if (userChoice) {
+        navigate("/login");
+      }
+      return;
+    }
+    navigate("/SEO");
+  };
 
   // Service data array for cleaner mapping
   const services = [
@@ -108,6 +171,7 @@ function Home() {
       
       {/* Navbar with Glassmorphism */}
       <Navbar user={user} onLogout={handleLogout} />
+      
       {/* Hero Section with Modern Design */}
       <section className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 text-white py-20 md:py-28 px-4">
         {/* Animated Background Blobs */}
@@ -184,7 +248,14 @@ function Home() {
             <motion.button 
               whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(0,0,0,0.2)" }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => navigate("/contact_me")}
+              onClick={() => {
+                if (!isLoggedIn) {
+                  const userChoice = window.confirm("You need to login to contact us. Do you want to login now?");
+                  if (userChoice) navigate("/login");
+                  return;
+                }
+                navigate("/contact_me");
+              }}
               className="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all"
             >
               Get Started <FaArrowRight className="inline ml-2" />
@@ -192,7 +263,14 @@ function Home() {
             <motion.button 
               whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.2)" }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => navigate("/portfolio")}
+              onClick={() => {
+                if (!isLoggedIn) {
+                  const userChoice = window.confirm("You need to login to view portfolio. Do you want to login now?");
+                  if (userChoice) navigate("/login");
+                  return;
+                }
+                navigate("/portfolio");
+              }}
               className="border-2 border-white/50 text-white px-8 py-3 rounded-full font-semibold backdrop-blur-sm hover:bg-white/10 transition-all"
             >
               View Portfolio
@@ -408,6 +486,14 @@ function Home() {
                 transition={{ delay: idx * 0.1 }}
                 whileHover={{ y: -10 }}
                 className="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer"
+                onClick={() => {
+                  if (!isLoggedIn) {
+                    const userChoice = window.confirm("You need to login to view portfolio details. Do you want to login now?");
+                    if (userChoice) navigate("/login");
+                    return;
+                  }
+                  navigate("/portfolio");
+                }}
               >
                 <img src={item.image} alt={item.title} className="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-6">

@@ -10,7 +10,7 @@ import {
   FaHeart, FaShare, FaArrowLeft, FaWhatsapp, FaEnvelope,
   FaCreditCard, FaLock, FaCalendarCheck, FaUserTie
 } from "react-icons/fa";
-
+import Chatbot from './chatbot';
 const SingleWebsiteGig = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -498,6 +498,7 @@ const SingleWebsiteGig = () => {
         </div>
       </motion.div>
 
+      <Chatbot />
       <Footer />
     </>
   );

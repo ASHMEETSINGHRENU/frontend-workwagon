@@ -9,7 +9,7 @@ import {
   FaArrowRight, FaFilter, FaSearch as FaSearchIcon, FaTimes,
   FaDatabase, FaTachometerAlt, FaLink, FaFileAlt
 } from "react-icons/fa";
-
+import Chatbot from './chatbot';
 export default function SEOGigs() {
   const [gigs, setGigs] = useState([]);
   const [filteredGigs, setFilteredGigs] = useState([]);
@@ -384,6 +384,7 @@ export default function SEOGigs() {
           </div>
         </motion.div>
       </div>
+      <Chatbot />
 
       <Footer />
     </div>

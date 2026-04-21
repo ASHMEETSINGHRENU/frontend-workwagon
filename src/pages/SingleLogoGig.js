@@ -11,6 +11,7 @@ import {
   FaCreditCard, FaLock, FaUserTie, FaEye,
   FaRegGem
 } from "react-icons/fa";
+import Chatbot from './chatbot';
 
 const SingleLogoGig = () => {
   const { id } = useParams();
@@ -526,7 +527,7 @@ const SingleLogoGig = () => {
           </motion.div>
         </div>
       </motion.div>
-
+       <Chatbot />
       <Footer />
     </>
   );

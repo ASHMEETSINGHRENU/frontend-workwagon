@@ -9,6 +9,7 @@ import {
   FaUserTie, FaMedal, FaShieldAlt,
   FaArrowRight, FaFilter, FaSearch, FaTimes
 } from "react-icons/fa";
+import Chatbot from './chatbot';
 
 export default function WebsiteGigs() {
   const [gigs, setGigs] = useState([]);
@@ -343,7 +344,7 @@ export default function WebsiteGigs() {
         </div>
 
       </div>
-
+       <Chatbot />
       <Footer />
     </div>
   );

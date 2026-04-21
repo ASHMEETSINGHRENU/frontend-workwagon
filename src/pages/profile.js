@@ -10,6 +10,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Chatbot from './chatbot';
 
 function Profile() {
   const navigate = useNavigate();
@@ -458,7 +459,7 @@ function Profile() {
           </motion.div>
         </div>
       </motion.div>
-
+      <Chatbot />
       <Footer />
     </>
   );

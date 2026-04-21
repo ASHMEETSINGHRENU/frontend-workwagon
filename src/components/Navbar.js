@@ -2,15 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
-  FaBars, FaTimes, FaSearch, FaHome, FaLaptopCode, 
+  FaBars, FaTimes, FaHome, FaLaptopCode, 
   FaImage, FaFileAlt, FaSignOutAlt, FaUserCircle, 
   FaChevronDown, FaUser, FaBriefcase
 } from "react-icons/fa";
-//FaCog,
+
 function Navbar() {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [showSearch, setShowSearch] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [profileImageError, setProfileImageError] = useState(false);
@@ -50,10 +49,6 @@ function Navbar() {
     if (isProfileOpen) setIsProfileOpen(false);
   };
 
-  const toggleSearch = () => {
-    setShowSearch(!showSearch);
-  };
-
   const toggleProfile = () => {
     setIsProfileOpen(!isProfileOpen);
     if (isMenuOpen) setIsMenuOpen(false);
@@ -91,17 +86,13 @@ function Navbar() {
     exit: { opacity: 0, y: -20, scale: 0.95, transition: { duration: 0.15 } }
   };
 
-  const searchVariants = {
-    hidden: { opacity: 0, height: 0, marginTop: 0 },
-    visible: { opacity: 1, height: "auto", marginTop: 12, transition: { duration: 0.3 } }
-  };
-
   return (
     <motion.nav 
       initial="hidden"
       animate="visible"
       variants={navVariants}
-      className="sticky top-0 z-50 backdrop-blur-xl bg-white/80 shadow-lg border-b border-white/20"
+      style={{ position: 'sticky', top: 0, zIndex: 9999 }}
+      className="w-full backdrop-blur-xl bg-white/80 shadow-lg border-b border-white/20"
     >
       <div className="px-4 py-3 md:px-6 max-w-7xl mx-auto">
         <div className="flex items-center justify-between">
@@ -109,14 +100,13 @@ function Navbar() {
           <motion.div 
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="cursor-pointer"
+            className="cursor-pointer flex-shrink-0"
             onClick={() => navigate("/")}
           >
             <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
               WorkWagon
             </span>
           </motion.div>
-
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center gap-2">
@@ -201,14 +191,6 @@ function Navbar() {
 
           {/* Mobile Controls */}
           <div className="flex items-center gap-2 md:hidden">
-            <motion.button 
-              whileTap={{ scale: 0.9 }}
-              onClick={toggleSearch}
-              className="text-gray-600 p-2"
-            >
-              <FaSearch size={18} />
-            </motion.button>
-            
             {/* Mobile User Avatar (if logged in) */}
             {user && (
               <motion.button
@@ -238,28 +220,6 @@ function Navbar() {
             </motion.button>
           </div>
         </div>
-
-        {/* Mobile Search Input */}
-        <AnimatePresence>
-          {showSearch && (
-            <motion.div
-              variants={searchVariants}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              className="md:hidden"
-            >
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search for tasks..."
-                  className="w-full px-4 py-2 pl-10 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
-                />
-                <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm" />
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
 
         {/* Mobile Menu */}
         <AnimatePresence>

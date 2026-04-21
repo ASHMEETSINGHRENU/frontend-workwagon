@@ -12,19 +12,14 @@ import SingleSEOGig from "./pages/SingleSEOGig";
 import Freelancer from "./pages/freelancer";
 import FreelancerRegistration from "./pages/freelancer.registration";
 import FreelancerLogin from "./pages/freelancer.login";
-
 import FreelancerLogo from './pages/freelancerLogo';
 import Dashboards from './pages/Dashboards';
-
 import FreelancerWebsite from './pages/freelancerWebsite';
-
 import FreelancerSEO from './pages/FreelancerSEO';
-
 import Analysis from "./pages/Analysis";
-
 import Profile from "./pages/profile";
-
 import Portfolio from "./pages/Portfolio";
+
 const ProtectedRoute = ({ children }) => {
   const user = localStorage.getItem("user");
   return user ? children : <Navigate to="/login" />;
@@ -35,22 +30,15 @@ const ProtectedRouteFreelancer = ({ children }) => {
   return user ? children : <Navigate to="/freelancer-login" />;
 };
 
-
 function App() {
   return (
     <Router>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
+        {/* Make Home route public - no protection */}
+        <Route path="/" element={<Home />} />
+        
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-                 
                  
         <Route
           path="/profile"
@@ -69,6 +57,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        
         <Route
           path="/websitegigs/:id"
           element={
@@ -78,64 +67,95 @@ function App() {
           }
         />
       
-<Route 
-  path="/contact_me" 
-  element={
-    <ProtectedRoute>
-      <ContactMe />
-    </ProtectedRoute>
-  }
-/>
+        <Route 
+          path="/contact_me" 
+          element={
+            <ProtectedRoute>
+              <ContactMe />
+            </ProtectedRoute>
+          }
+        />
 
-<Route 
-  path="/logogigs" 
-  element={
-    <ProtectedRoute>
-      <LogoGigs />
-    </ProtectedRoute>
-  } 
-/>
+        <Route 
+          path="/logogigs" 
+          element={
+            <ProtectedRoute>
+              <LogoGigs />
+            </ProtectedRoute>
+          } 
+        />
 
-<Route 
-  path="/SEO" 
-  element={
-    <ProtectedRoute>
-      <SEOGigs />
-    </ProtectedRoute>
-  }
-/>
+        <Route 
+          path="/SEO" 
+          element={
+            <ProtectedRoute>
+              <SEOGigs />
+            </ProtectedRoute>
+          }
+        />
 
-<Route 
-  path="/logogigs/:id" 
-  element={
-    <ProtectedRoute>
-      <SingleLogoGig />
-    </ProtectedRoute>
-  } 
-/>
-<Route 
-  path="/SEO/:id" 
-  element={
-    <ProtectedRoute>
-      <SingleSEOGig />
-    </ProtectedRoute>
-  }
-/>
+        <Route 
+          path="/logogigs/:id" 
+          element={
+            <ProtectedRoute>
+              <SingleLogoGig />
+            </ProtectedRoute>
+          } 
+        />
+        
+        <Route 
+          path="/SEO/:id" 
+          element={
+            <ProtectedRoute>
+              <SingleSEOGig />
+            </ProtectedRoute>
+          }
+        />
 
-
-        <Route path="/freelancer" element={ <ProtectedRouteFreelancer><Freelancer /></ProtectedRouteFreelancer>} />
-        <Route path="/freelancer-registration" element={ <FreelancerRegistration />} />
-        <Route path="/freelancer-login" element={<FreelancerLogin />} />
-        <Route path="/dashboard" element={ <ProtectedRouteFreelancer><Dashboards /></ProtectedRouteFreelancer>} />
-        <Route path="/freelancerLogo" element={  <ProtectedRouteFreelancer><FreelancerLogo /></ProtectedRouteFreelancer>} />
-        <Route path="/freelancerWebsite" element={<ProtectedRouteFreelancer><FreelancerWebsite /></ProtectedRouteFreelancer>} />
-        <Route path="/freelancerSEO" element={<ProtectedRouteFreelancer><FreelancerSEO /></ProtectedRouteFreelancer>} />
-        <Route path="/analysis" element={<ProtectedRouteFreelancer><Analysis /></ProtectedRouteFreelancer>} />
-        <Route path="/portfolio" element={<ProtectedRoute><Portfolio /></ProtectedRoute>} />
-
-
-
-
+        <Route 
+          path="/freelancer" 
+          element={<ProtectedRouteFreelancer><Freelancer /></ProtectedRouteFreelancer>} 
+        />
+        
+        <Route 
+          path="/freelancer-registration" 
+          element={<FreelancerRegistration />} 
+        />
+        
+        <Route 
+          path="/freelancer-login" 
+          element={<FreelancerLogin />} 
+        />
+        
+        <Route 
+          path="/dashboard" 
+          element={<ProtectedRouteFreelancer><Dashboards /></ProtectedRouteFreelancer>} 
+        />
+        
+        <Route 
+          path="/freelancerLogo" 
+          element={<ProtectedRouteFreelancer><FreelancerLogo /></ProtectedRouteFreelancer>} 
+        />
+        
+        <Route 
+          path="/freelancerWebsite" 
+          element={<ProtectedRouteFreelancer><FreelancerWebsite /></ProtectedRouteFreelancer>} 
+        />
+        
+        <Route 
+          path="/freelancerSEO" 
+          element={<ProtectedRouteFreelancer><FreelancerSEO /></ProtectedRouteFreelancer>} 
+        />
+        
+        <Route 
+          path="/analysis" 
+          element={<ProtectedRouteFreelancer><Analysis /></ProtectedRouteFreelancer>} 
+        />
+        
+        <Route 
+          path="/portfolio" 
+          element={<ProtectedRoute><Portfolio /></ProtectedRoute>} 
+        />
       </Routes>
     </Router>
   );

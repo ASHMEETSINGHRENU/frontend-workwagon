@@ -9,6 +9,7 @@ import {
   FaArrowRight, FaFilter, FaSearch, FaTimes,
   FaImage, FaVectorSquare, FaFont, FaEye
 } from "react-icons/fa";
+import Chatbot from './chatbot';
 
 export default function LogoGigs() {
   const [gigs, setGigs] = useState([]);
@@ -383,7 +384,7 @@ export default function LogoGigs() {
           </div>
         </motion.div>
       </div>
-
+      <Chatbot />
       <Footer />
     </div>
   );

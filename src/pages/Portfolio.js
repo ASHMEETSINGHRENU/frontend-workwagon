@@ -8,10 +8,11 @@ import {
   FaLaptopCode, FaDatabase
 } from 'react-icons/fa';
 
+
 // FaServer ,  FaMobile
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-
+import Chatbot from './chatbot';
 const Portfolio = () => {
   const [filter, setFilter] = useState('all');
   const [selectedProject, setSelectedProject] = useState(null);
@@ -645,7 +646,8 @@ const Portfolio = () => {
           </motion.div>
         )}
       </AnimatePresence>
-
+      <Chatbot />
+       <Footer />
     </div>
   );
 };
