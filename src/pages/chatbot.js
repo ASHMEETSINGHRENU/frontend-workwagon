@@ -3,9 +3,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { 
-  FaComments, FaTimes, FaPaperPlane, FaRobot, FaUser, 
+  FaComments, FaTimes, FaPaperPlane, FaRobot, 
   FaLaptopCode, FaPaintBrush, FaChartLine, FaBriefcase, 
-  FaUserTie, FaArrowRight, FaHeadset, FaClock, FaCheckCircle,
+  FaUserTie, FaArrowRight, FaClock, FaCheckCircle,
   FaStar, FaShieldAlt, FaRocket, FaHeart
 } from 'react-icons/fa';
 
