@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { FaArrowRight, FaCheckCircle, FaLaptopCode, FaPaintBrush, FaChartLine, FaHandshake, FaLightbulb, FaRocket, FaUserCheck, FaGem, FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -37,8 +37,8 @@ function Home() {
   // Check if user is logged in
   const isLoggedIn = !!user;
 
-  // Handle click anywhere on the page
-  const handlePageClick = (e) => {
+  // Handle click anywhere on the page - wrapped in useCallback
+  const handlePageClick = useCallback((e) => {
     // Don't show alert if user is already logged in
     if (isLoggedIn) return;
     
@@ -56,7 +56,7 @@ function Home() {
         navigate("/login");
       }
     }
-  };
+  }, [isLoggedIn, navigate]);
 
   // Add click event listener to the document
   useEffect(() => {
@@ -66,7 +66,7 @@ function Home() {
         document.removeEventListener('click', handlePageClick);
       };
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, handlePageClick]); // Added handlePageClick as dependency
 
   const handleLogout = () => {
     const confirmLogout = window.confirm("Are you sure you want to logout?");
