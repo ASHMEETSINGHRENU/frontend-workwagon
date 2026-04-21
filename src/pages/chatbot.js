@@ -15,7 +15,6 @@ const Chatbot = () => {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [showQuickReplies, setShowQuickReplies] = useState(true);
   const messagesEndRef = useRef(null);
 
   // Initial welcome message
@@ -36,7 +35,7 @@ const Chatbot = () => {
         }
       ]);
     }
-  }, []);
+  }, [messages.length]);
 
   // Auto-scroll to bottom
   useEffect(() => {
@@ -65,7 +64,6 @@ const Chatbot = () => {
       timestamp: new Date()
     };
     setMessages(prev => [...prev, userMessage]);
-    setShowQuickReplies(false);
     
     setTimeout(() => {
       handleBotResponse(action);
@@ -289,7 +287,6 @@ const Chatbot = () => {
       timestamp: new Date()
     };
     setMessages(prev => [...prev, userMessage]);
-    setShowQuickReplies(false);
 
     const lowerInput = inputValue.toLowerCase();
     let action = "default";
