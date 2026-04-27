@@ -19,6 +19,7 @@ import FreelancerSEO from './pages/FreelancerSEO';
 import Analysis from "./pages/Analysis";
 import Profile from "./pages/profile";
 import Portfolio from "./pages/Portfolio";
+import PaymentGateway from './pages/PaymentGateway';
 
 const ProtectedRoute = ({ children }) => {
   const user = localStorage.getItem("user");
@@ -153,10 +154,16 @@ function App() {
         />
         
         <Route 
+          path="/payment" 
+          element={<ProtectedRoute><PaymentGateway /></ProtectedRoute>} 
+        />
+        
+        <Route 
           path="/portfolio" 
           element={<ProtectedRoute><Portfolio /></ProtectedRoute>} 
         />
       </Routes>
+      
     </Router>
   );
 }

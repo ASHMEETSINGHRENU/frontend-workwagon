@@ -421,6 +421,7 @@ const SingleWebsiteGig = () => {
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
+                       onClick={() => navigate("/payment")}
                       className="w-full py-3 rounded-xl bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
                     >
                       <FaCreditCard />

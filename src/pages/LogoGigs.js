@@ -365,23 +365,7 @@ export default function LogoGigs() {
             />
           </div>
           
-          <div className="relative z-10 p-8 md:p-12 text-center text-white">
-            <h3 className="text-2xl md:text-3xl font-bold mb-3">
-              Need a Unique Logo for Your Brand?
-            </h3>
-            <p className="text-purple-100 mb-6 max-w-2xl mx-auto">
-              Get custom logo designs from top-rated creative professionals
-            </p>
-            <Link to="/post-project">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-6 py-3 bg-white text-purple-600 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all"
-              >
-                Start Your Design Project
-              </motion.button>
-            </Link>
-          </div>
+
         </motion.div>
       </div>
       <Chatbot />
