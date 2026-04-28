@@ -513,7 +513,7 @@ const Portfolio = () => {
           </motion.div>
         </div>
       </section> */}
-      <Footer />
+
 
       {/* Project Details Modal */}
       <AnimatePresence>
